@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "Website Time Tracker",
+  "version": "1.0",
+  "description": "Tracks time spent on websites and displays a graph.",
+  "permissions": ["tabs", "storage", "activeTab", "scripting"],
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "service_worker": "src/background/background.js"
+  },
+  "action": {
+    "default_popup": "src/popup/popup.html",
+    "default_icon": "src/assets/webtracker.png"
+  },
+  "icons": {
+    "16": "src/assets/webtracker.png",
+    "48": "src/assets/webtracker.png",
+    "128": "src/assets/webtracker.png"
+  }
+}

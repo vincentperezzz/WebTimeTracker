@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WebTimeTracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <img src="/src/assets/webtracker.svg" alt="WebTimeTracker Icon" class="icon">
+    <h1>WebTimeTracker</h1>
+  </div>
+
+  <!-- Wtih Time State -->
+  <div class="content withTime">
+    <h1>Overall Used Website</h1>
+    <canvas id="timeChart" width="400" height="200"></canvas>
+    <div class="top-sites">
+      <h2>Top Sites</h2>
+      <ul id="topSitesList"></ul>
+    </div>
+    <button id="resetButton">Reset</button>
+  </div>
+
+  <!-- Empty State -->
+  <div class="content emptyState">
+    <h1>No used website yet :<</h1>
+    <img src="/src/assets/empty.png" alt="Empty State Icon" class="empty-icon">
+    <h2>Browse the web and return to see how long you visit the websites.</h2>
+  </div>
+
+  <script src="chart.min.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
