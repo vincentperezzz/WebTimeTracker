@@ -15,17 +15,14 @@ body {
     align-items: center;
     gap: 10px;
     border-bottom: 0.5px solid rgba(5, 9, 38, 0.28);
-    background: #FFF;
 }
 
 .withTime{
-    width: 393px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     border-bottom: 0.5px solid rgba(5, 9, 38, 0.28);
-    background: #FFF;
 }
 
 .container h1 {
