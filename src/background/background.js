@@ -105,3 +105,13 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     return true; // Keep the message channel open for async response
   }
 });
+
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message.type === "resetTimeTracking") {
+    activeTabId = null;
+    startTime = null;
+    timeData = {};
+    console.log("Time tracking reset");
+    sendResponse();
+  }
+});

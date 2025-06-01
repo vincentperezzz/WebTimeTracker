@@ -19,11 +19,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 resetButton.addEventListener("click", () => {
   chrome.storage.local.clear(() => {
-    activeTabId = null; 
-    startTime = null; 
-    timeData = {}; 
-    updateVisibility();
-    console.log("Storage cleared");
+    chrome.runtime.sendMessage({ type: "resetTimeTracking" }, () => {
+      updateVisibility();
+      console.log("Storage cleared and time tracking reset");
+    });
   });
 });
 
