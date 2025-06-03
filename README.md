@@ -13,7 +13,6 @@ WebTracker is a Chrome extension designed to help users monitor and manage their
 - **Top Sites List**: Shows a list of the most visited websites along with the time spent on each.
 - **Reset Functionality**: Allows users to clear all tracked data and start fresh.
 - **Real-Time Updates**: Periodically updates the chart and top sites list to ensure data accuracy.
-- **Domain Filtering**: Excludes unwanted domains like `chrome://` and `chrome-extension://` from tracking.
 
 ### File Overview
 
@@ -40,7 +39,9 @@ A minified version of Chart.js, a JavaScript library used for creating the dough
 
 ### Design Choices
 
-One of the key design decisions was to use Chart.js for data visualization. This library was chosen for its simplicity, flexibility, and ability to create visually appealing charts. Another decision was to filter out certain domains from tracking to ensure the data remains relevant and useful to the user.
+One of the key design decisions was to use Chart.js for data visualization. This library was chosen for its simplicity, flexibility, and ability to create visually appealing charts. The doughnut chart provides an intuitive way to represent time spent on different websites, making it easy for users to understand their browsing habits at a glance.
+
+The extension also utilizes local storage to persist data across browser sessions, allowing users to retain their browsing history without relying on external servers. This approach enhances privacy and ensures that users have control over their data.
 
 The extension was designed with performance in mind, using efficient data retrieval and update mechanisms to minimize resource usage. The periodic updates for the chart and top sites list were carefully timed to balance real-time accuracy with system efficiency.
 

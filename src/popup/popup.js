@@ -54,9 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const filteredTimeData = Object.entries(timeData)
       .filter(([domain, seconds]) => 
         !domain.startsWith("chrome://") && 
-        !domain.startsWith("chrome://extensions") && 
-        domain !== "newtab" && 
-        seconds > 0 // Ensure only domains with time are included
+        seconds > 0 
       )
       .sort(([, timeA], [, timeB]) => timeB - timeA);
 
