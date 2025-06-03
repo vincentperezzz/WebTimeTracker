@@ -1,6 +1,6 @@
 # WebTracker Chrome Extension
 
-#### Video Demo:  <URL HERE>
+#### Video Demo: https://youtu.be/K-7TxIdkQqY
 
 #### Description:
 
