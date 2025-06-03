@@ -17,14 +17,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-resetButton.addEventListener("click", () => {
-  chrome.storage.local.clear(() => {
-    chrome.runtime.sendMessage({ type: "resetTimeTracking" }, () => {
-      updateVisibility();
-      console.log("Storage cleared and time tracking reset");
+  resetButton.addEventListener("click", () => {
+    chrome.storage.local.clear(() => {
+      chrome.runtime.sendMessage({ type: "resetTimeTracking" }, () => {
+        updateVisibility();
+        console.log("Storage cleared and time tracking reset");
+      });
     });
   });
-});
 
   updateVisibility();
 
@@ -38,39 +38,39 @@ resetButton.addEventListener("click", () => {
     return `${hours}h ${minutes}m ${secs}s`;
   }
 
-   function updatePopupDisplay(timeData) {
+  function updatePopupDisplay(timeData) {
     const labels = [];
     const data = [];
     const topSitesList = document.getElementById("topSitesList");
-  
+
     // Clear previous data
     topSitesList.innerHTML = "";
-  
+
     // Filter out unwanted domains
     const filteredTimeData = Object.entries(timeData)
       .filter(([domain, seconds]) => !domain.startsWith("chrome://") && !domain.startsWith("chrome-extension://") && domain !== "newtab")
       .sort(([, timeA], [, timeB]) => timeB - timeA);
-  
+
     // Populate the chart data and top sites list
     filteredTimeData.forEach(([domain, seconds]) => {
       labels.push(domain);
-      data.push(seconds >= 60 ? seconds : 60); 
-  
+      data.push(seconds >= 60 ? seconds : 60);
+
       const listItem = document.createElement("li");
-  
+
       const siteNameSpan = document.createElement("span");
       siteNameSpan.className = "site-name";
       siteNameSpan.textContent = domain;
-  
+
       const siteTimeSpan = document.createElement("span");
       siteTimeSpan.className = "site-time";
       siteTimeSpan.textContent = formatTime(seconds);
-  
+
       listItem.appendChild(siteNameSpan);
       listItem.appendChild(siteTimeSpan);
       topSitesList.appendChild(listItem);
     });
-  
+
     // Update or render the chart
     const ctx = document.getElementById("timeChart").getContext("2d");
     if (chartInstance) {
