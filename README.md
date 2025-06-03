@@ -1,4 +1,7 @@
-# WebTracker Chrome Extension
+# Project Title: WebTracker Chrome Extension
+**Year:** 2025  
+**By:** Vincent Perez  
+**From:** Philippines  
 
 #### Video Demo: https://youtu.be/K-7TxIdkQqY
 
