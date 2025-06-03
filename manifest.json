@@ -3,7 +3,7 @@
   "name": "Website Time Tracker",
   "version": "1.0",
   "description": "Tracks time spent on websites and displays a graph.",
-  "permissions": ["tabs", "storage", "activeTab", "scripting", "tabs"],
+  "permissions": ["tabs", "storage", "activeTab", "scripting"],
   "host_permissions": [
     "http://*/*",
     "https://*/*"
