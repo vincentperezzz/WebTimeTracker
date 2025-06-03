@@ -28,8 +28,8 @@ function updateElapsedTime(tabId, now) {
   const elapsed = now - startTime;
   chrome.tabs.get(tabId, (tab) => {
     if (chrome.runtime.lastError) {
-      console.error("Error getting tab:", chrome.runtime.lastError.message);
-      return;
+      console.warn(`Error getting tab with id ${tabId}:`, chrome.runtime.lastError.message);
+      return; // Exit gracefully if the tab no longer exists
     }
 
     if (tab && tab.url) {
@@ -43,6 +43,15 @@ function updateElapsedTime(tabId, now) {
     }
   });
 }
+
+chrome.tabs.onRemoved.addListener((tabId) => {
+  if (tabId === activeTabId) {
+    const now = Date.now();
+    updateElapsedTime(tabId, now);
+    activeTabId = null;
+    startTime = null;
+  }
+});
 
 // Reset data when the browser is reopened
 chrome.runtime.onStartup.addListener(() => {
