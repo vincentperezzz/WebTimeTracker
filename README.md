@@ -1,4 +1,4 @@
-# Project Title: WebTracker Chrome Extension
+# WebTracker Chrome Extension
 **Year:** 2025  
 **By:** Vincent Perez  
 **From:** Philippines  
