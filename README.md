@@ -1,7 +1,4 @@
 # WebTracker Chrome Extension
-**Year:** 2025  
-**By:** Vincent Perez  
-**From:** Philippines  
 
 #### Video Demo: https://youtu.be/QQQ-PpHYtZ4
 
@@ -55,3 +52,7 @@ The extension was designed with performance in mind, using efficient data retrie
 - **Advanced Analytics**: Include additional charts and metrics to give users deeper insights into their browsing habits.
 
 WebTracker is a powerful tool for anyone looking to take control of their online time. With its intuitive interface and robust functionality, it aims to make time management easier and more effective.
+
+**Year:** 2025  
+**By:** Vincent Perez  
+**From:** Philippines  
