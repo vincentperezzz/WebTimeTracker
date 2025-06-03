@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Populate the chart data and top sites list
     filteredTimeData.forEach(([domain, seconds]) => {
       labels.push(domain);
-      data.push(seconds >= 60 ? seconds : 60);
+      data.push(seconds);
 
       const listItem = document.createElement("li");
 
@@ -101,11 +101,16 @@ document.addEventListener("DOMContentLoaded", () => {
           },
           tooltip: {
             callbacks: {
-              // Update the tooltip callback to correctly format hours and minutes
               label: function (context) {
                 const seconds = context.raw;
                 const hours = Math.floor(seconds / 3600);
                 const minutes = Math.floor((seconds % 3600) / 60);
+          
+                // Check if time is less than a minute
+                if (hours === 0 && minutes === 0) {
+                  return "Time: Less than a minute";
+                }
+          
                 return `Time: ${hours}h ${minutes}m`;
               },
             },
@@ -137,10 +142,19 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }, 1000); // Update every second
 
-  // Periodically update the chart every minute
-  setInterval(() => {
-    chrome.storage.local.get(null, (data) => {
-      updatePopupDisplay(data);
-    });
-  }, 60000); // Update every minute
+  chrome.storage.onChanged.addListener((changes, areaName) => {
+    if (areaName === "local") {
+      chrome.storage.local.get(null, (data) => {
+        const hasMinuteChange = Object.values(changes).some((change) => {
+          const oldSeconds = change.oldValue || 0;
+          const newSeconds = change.newValue || 0;
+          return Math.floor(oldSeconds / 60) !== Math.floor(newSeconds / 60);
+        });
+  
+        if (hasMinuteChange) {
+          updatePopupDisplay(data); // Update the chart only if there's a minute change
+        }
+      });
+    }
+  });
 });
