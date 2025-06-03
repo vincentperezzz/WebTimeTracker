@@ -28,47 +28,6 @@ resetButton.addEventListener("click", () => {
 
   updateVisibility();
 
-  chrome.runtime.sendMessage({ type: "getTimeData" }, (timeData) => {
-    const labels = Object.keys(timeData);
-    const data = Object.values(timeData).map((ms) => ms / 1000 / 60); // Convert ms to minutes
-
-    const ctx = document.getElementById("timeChart").getContext("2d");
-    new Chart(ctx, {
-      type: "piechart", 
-      data: {
-        labels: labels, // Website domains
-        datasets: [
-          {
-            data: data, // Time in seconds
-            backgroundColor: [
-              "#FF6384",
-              "#36A2EB",
-              "#FFCE56",
-              "#4BC0C0",
-              "#9966FF",
-            ],
-          },
-        ],
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: {
-            position: "top",
-          },
-          tooltip: {
-            callbacks: {
-              label: function (context) {
-                const seconds = context.raw;
-                return `Time: ${formatTime(seconds)}`;
-              },
-            },
-          },
-        },
-      },
-    });
-  });
-
   let chartInstance = null;
 
   function formatTime(seconds) {
@@ -95,7 +54,7 @@ resetButton.addEventListener("click", () => {
     // Populate the chart data and top sites list
     filteredTimeData.forEach(([domain, seconds]) => {
       labels.push(domain);
-      data.push(seconds >= 60 ? seconds : 60); // Use 1 minute for entries less than 60 seconds
+      data.push(seconds >= 60 ? seconds : 60); 
   
       const listItem = document.createElement("li");
   
