@@ -27,11 +27,6 @@ function updateElapsedTime(tabId, now) {
 
   const elapsed = now - startTime;
   chrome.tabs.get(tabId, (tab) => {
-    if (chrome.runtime.lastError) {
-      console.error("Error getting tab:", chrome.runtime.lastError.message);
-      return;
-    }
-
     if (tab && tab.url) {
       const domain = getDomain(tab.url);
       if (domain) {
