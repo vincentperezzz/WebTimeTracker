@@ -101,10 +101,12 @@ document.addEventListener("DOMContentLoaded", () => {
           },
           tooltip: {
             callbacks: {
+              // Update the tooltip callback to correctly format hours and minutes
               label: function (context) {
                 const seconds = context.raw;
-                const minutes = Math.ceil(seconds / 60); // Round up to the nearest minute
-                return `Time: 0h ${minutes}m`;
+                const hours = Math.floor(seconds / 3600);
+                const minutes = Math.floor((seconds % 3600) / 60);
+                return `Time: ${hours}h ${minutes}m`;
               },
             },
           },
