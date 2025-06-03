@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const withTimeState = document.querySelector(".content.withTime");
   const emptyState = document.querySelector(".content.emptyState");
 
+  //Shows the popup content based on whether there is time data available
   function updateVisibility() {
     chrome.storage.local.get(null, (data) => {
       const hasData = Object.values(data).some((time) => time > 0);
@@ -17,6 +18,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // Initial visibility check
+  updateVisibility();
+
+  // Reset button functionality
   resetButton.addEventListener("click", () => {
     chrome.storage.local.clear(() => {
       chrome.runtime.sendMessage({ type: "resetTimeTracking" }, () => {
@@ -25,8 +30,6 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   });
-
-  updateVisibility();
 
   let chartInstance = null;
 
@@ -38,6 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return `${hours}h ${minutes}m ${secs}s`;
   }
 
+  // Update the popup display with time datasets
   function updatePopupDisplay(timeData) {
     const labels = [];
     const data = [];
@@ -48,7 +52,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Filter out unwanted domains
     const filteredTimeData = Object.entries(timeData)
-      .filter(([domain, seconds]) => !domain.startsWith("chrome://") && !domain.startsWith("chrome-extension://") && domain !== "newtab")
+      .filter(([domain, seconds]) => 
+        !domain.startsWith("chrome://") && 
+        !domain.startsWith("chrome-extension://") && 
+        domain !== "newtab" && 
+        seconds > 0 // Ensure only domains with time are included
+      )
       .sort(([, timeA], [, timeB]) => timeB - timeA);
 
     // Populate the chart data and top sites list
